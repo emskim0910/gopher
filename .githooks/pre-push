@@ -1,0 +1,13 @@
+#!/bin/sh
+# Last gate before anything becomes public: checks every file of every commit about to be pushed,
+# including commits made with --no-verify, by merge or by cherry-pick.
+zero=0000000000000000000000000000000000000000
+while read local_ref local_sha remote_ref remote_sha; do
+  [ "$local_sha" = "$zero" ] && continue
+  if [ "$remote_sha" = "$zero" ]; then range="$local_sha"; else range="$remote_sha..$local_sha"; fi
+  python tools/check_protected.py --history "$range" || {
+    echo "Push refused by the file-protection check."
+    exit 1
+  }
+done
+exit 0

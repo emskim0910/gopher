@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GOPHER · Ethan Kim</title>
+  <meta name="description" content="GOPHER: a self-propelled, tethered unmanned underground vehicle that anchors itself in its own bore. Patent pending." />
+  <meta name="theme-color" content="#08090c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<!--
+  EDITING THIS PAGE
+  Everything you read on the site is plain text in this file. Change the words and save.
+  Two rules before adding anything:
+    1. Keep every statement to what the filed patent specification and drawings say.
+    2. Never add CAD, STEP, STL, PDF or spreadsheet files to this folder. Pictures only (.webp).
+       tools/check_protected.py refuses a commit that breaks this.
+-->
+
+<header class="topbar">
+  <a class="brand" href="#top">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">ETHAN <b>KIM</b></span>
+  </a>
+  <nav class="topnav">
+    <a href="#overview">Overview</a>
+    <a href="#motion">Motion</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#missions">Missions</a>
+    <a href="#status">Status</a>
+    <a class="btn btn-primary btn-small" href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- Hero: the exploded exterior view is pinned while the text scrolls; scrolling assembles the vehicle.
+       It is a sequence of flat images (assets/hero), not a 3D model: outside surfaces only, no perspective. -->
+  <section class="hero" id="hero">
+    <div class="hero-stage">
+      <div class="hero-copy">
+        <p class="eyebrow">GOPHER · Patent Pending</p>
+        <h1>A Tunneling Vehicle<br />That <span class="accent">Anchors Itself.</span></h1>
+        <p class="lede">
+          GOPHER is a small-diameter, self-propelled, tethered unmanned underground vehicle. Two
+          sets of gripper shoes take turns anchoring it against the wall of its own bore, so one set
+          is gripped at all times, and its own spoil buries the tether behind it.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#motion">How It Moves</a>
+          <a class="btn btn-ghost" href="#architecture">Architecture</a>
+        </div>
+        <p class="scroll-cue"><span class="cue-dot"></span>Scroll To Assemble</p>
+      </div>
+      <div class="hero-model">
+        <canvas id="wire" aria-label="Exterior line drawing of the GOPHER vehicle, assembling as the page scrolls"></canvas>
+        <div class="model-status" id="model-status">Loading…</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <p class="strip-title">Four Systems In One Vehicle</p>
+    <ul class="strip-list">
+      <li>Dual-Anchor Inchworm Propulsion</li>
+      <li>Through-Articulation Spoil Transport</li>
+      <li>Self-Burying Tether</li>
+      <li>Payload Bay</li>
+    </ul>
+  </section>
+
+  <!-- Overview -->
+  <section class="block" id="overview">
+    <div class="block-head">
+      <p class="eyebrow">Overview</p>
+      <h2>Ground-Operated Platform For Hazardous Excavation, Remote.</h2>
+      <p class="lede">
+        Mines, tunnels, utility corridors and collapsed structures can become inaccessible through
+        roof falls, flooding, fire, hazardous atmosphere or structural failure. Before anyone can
+        enter safely, operators may need to establish communications, assess conditions, and deliver
+        water, medical supplies or sensors. GOPHER is a proposed remotely operated micro-boring
+        platform for creating that access.
+      </p>
+    </div>
+
+    <div class="stats">
+      <div><strong>2</strong><span>anchor sets, one on each body; one is gripped at all times</span></div>
+      <div><strong>1</strong><span>spoil conduit on the vehicle axis, from the cutterhead to the tail</span></div>
+      <div><strong>0</strong><span>strokes that rely on the cutting face for reaction</span></div>
+    </div>
+
+    <div class="features three">
+      <article class="feature">
+        <p class="feature-num">01</p>
+        <h3>Walks Out Of Its Launch Tube</h3>
+        <p>Many conventional microtunneling systems require launch shafts, thrust-reaction frames, jacking pits and installed pipe strings. GOPHER launches from a tube, walking out of it under its own dual-anchor cycle with no separate pusher.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">02</p>
+        <h3>Reacts Its Own Thrust</h3>
+        <p>Both anchor sets react thrust against the bore wall, so cutterhead thrust does not depend on the vehicle's weight.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">03</p>
+        <h3>Keeps Its Supply Line</h3>
+        <p>Discharged spoil fills the bore behind the vehicle and buries the tether, which remains the operative supply line.</p>
+      </article>
+    </div>
+
+    <dl class="team">
+      <div><dt>Inventor</dt><dd>Ethan M. Kim<span>Sole Inventor</span></dd></div>
+      <div><dt>Patent</dt><dd>Patent Pending<span>U.S. provisional application filed November 8, 2026</span></dd></div>
+      <div><dt>Design</dt><dd>Revision G<span>Full-vehicle CAD model</span></dd></div>
+      <div><dt>Hardware</dt><dd>Not Yet Built<span>No prototype or test data yet</span></dd></div>
+    </dl>
+  </section>
+
+  <!-- Motion -->
+  <section class="block alt" id="motion">
+    <div class="block-head">
+      <p class="eyebrow">How It Moves</p>
+      <h2>One Set Always Grips.</h2>
+      <p class="lede">
+        Each body carries an independently actuated set of radially extensible gripper shoes. The
+        sets alternate as anchors while linear actuators spanning the articulation extend and
+        retract, so the vehicle advances like an inchworm.
+      </p>
+    </div>
+
+    <div class="split">
+      <ol class="steps">
+        <li><span>7A</span><div><h3>Anchor</h3><p>The rear gripper set is engaged and the actuators are fully retracted.</p></div></li>
+        <li><span>7B</span><div><h3>Push And Bore</h3><p>The actuators extend, driving the front body forward while the cutting head bores.</p></div></li>
+        <li><span>7C</span><div><h3>Hand Over</h3><p>The front gripper set engages and the cutting head stops.</p></div></li>
+        <li><span>7D</span><div><h3>Draw Up</h3><p>The rear gripper set releases and the actuators retract, drawing the rear body forward.</p></div></li>
+        <li><span>7E</span><div><h3>Reset</h3><p>The rear gripper set re-engages and the front set releases, returning the vehicle to the first state.</p></div></li>
+      </ol>
+      <figure class="figure">
+        <img src="assets/figures/fig-07-advance-cycle.webp" alt="Five side views of the vehicle in its bore showing the advance cycle" width="1169" height="1534" loading="lazy" draggable="false" />
+        <figcaption>FIG. 7A to 7E of the filed drawings: the advance cycle in sequence. Rear body (102), front body (104), shoes (132, 162), actuators (140), cutterhead (180).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="block" id="architecture">
+    <div class="block-head">
+      <p class="eyebrow">Architecture</p>
+      <h2>Two Bodies, One Joint, One Spoil Path.</h2>
+      <p class="lede">
+        A rear body and a front body are joined by an articulation that permits angular deflection.
+        The spoil conduit, coolant, water and wiring all cross that joint, and the spoil path stays
+        sealed through the full range of deflection and extension.
+      </p>
+    </div>
+
+    <figure class="figure">
+      <img src="assets/side-view.webp" alt="Side view of the assembled vehicle, exterior only" width="1800" height="330" loading="lazy" draggable="false" />
+      <figcaption>Side view of the assembled vehicle in true proportion, exterior only. Rear body at left with its gripper shoes, the articulation gap, the front body with its shoes, and the cutterhead at right.</figcaption>
+    </figure>
+
+    <div class="features">
+      <article class="feature">
+        <p class="feature-num">01</p>
+        <h3>Dual-Anchor Propulsion</h3>
+        <p>The rear set anchors while the actuators extend and drive the front body and cutterhead forward. The front set anchors while they retract and draw the rear body forward. Each shoe rides on guided stems whose bores in web rings carry the shoe's axial anchor load.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">02</p>
+        <h3>Guide-Ball Articulation</h3>
+        <p>A guide ball is carried on a sleeve that stays coaxial with the rear body. The ball is seated in the front body, so the front body deflects about it. Torque-reacting pins carried by the ball engage slots in the front body seat.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">03</p>
+        <h3>Through-Articulation Spoil Transport</h3>
+        <p>A first auger, turning with the cutterhead, lifts crushed material through a hollow head shaft. A second, independently driven auger carries it the length of the vehicle to a discharge port at the tail. The conduit crosses the joint through a telescoping splined shaft with a universal joint at the center of the guide ball.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">04</p>
+        <h3>Self-Burying Tether</h3>
+        <p>The tether pays out from the rear body. Spoil discharged at the tail fills the bore behind the vehicle and buries the tether, which remains a supply line after the vehicle stops.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">05</p>
+        <h3>Service Crossing</h3>
+        <p>Coolant, water and wiring cross the articulation on a rigid fluid rail and a rigid wire conduit that slide in bushings in the rear body. Fixed fluid stems telescope inside the rail, and a rolling wire loop feeds the conduit, so fluid and electrical services cross the articulation through its full stroke and deflection without flexible hose.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">06</p>
+        <h3>Payload Module</h3>
+        <p>The forward face of the vehicle behind the cutterhead is sealed. Supplies travel in a payload module in two cassettes, both loaded before launch.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">07</p>
+        <h3>Cutterhead</h3>
+        <p>A pilot bit leads the face. The face carries ten conical picks on five tracks, gauge rollers and muck apertures, with a crusher ring and crushing cone behind it. The head auger lifts crushed material through a hollow head shaft.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">08</p>
+        <h3>Closed Coolant Circuit</h3>
+        <p>A closed circuit of pumps, a cold plate, motor jackets and a full-length jacket.</p>
+      </article>
+    </div>
+
+  </section>
+
+  <!-- Missions -->
+  <section class="block alt" id="missions">
+    <div class="block-head">
+      <p class="eyebrow">Missions</p>
+      <h2>Reach The Space, Then Stay Connected To It.</h2>
+      <p class="lede">
+        When people are trapped behind a roof fall, responders may drill from the surface, steer a
+        small bore from a nearby shaft, or dig by hand through unstable rubble. Where there is no
+        access from above, hand excavation from an existing drift is slow and hazardous. GOPHER is
+        intended to address that gap, boring from a launch drift.
+      </p>
+    </div>
+
+    <figure class="figure">
+      <img src="assets/figures/fig-12-mission-schematic.webp" alt="Plan view of a bore from a launch drift through rubble to an occupied drift" width="1500" height="893" loading="lazy" draggable="false" />
+      <figcaption>FIG. 12 of the filed drawings: mission schematic in plan. Access shaft (244), launch drift (245), bore (246) through rubble (242) and pillar (243), crossing the side rib (241) of the drift (240), the head (180) stopped just inside it, and the tether (112) buried in the backfilled bore.</figcaption>
+    </figure>
+
+    <div class="features three">
+      <article class="feature">
+        <p class="feature-num">Rescue</p>
+        <h3>Search-And-Rescue Support</h3>
+        <p>Breakthrough is made through the side rib of the occupied drift, crossing it at 45 degrees or more. The approach is governed by a pilot bit that opens its hole before the face does, a hold state triggered by a drop in head thrust, and interlocks that permit head rotation and actuator motion only in the correct grip state of each shoe set.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">Access</p>
+        <h3>Inspection And Infrastructure</h3>
+        <p>Hazardous environment inspection, utility and infrastructure assessment, geological or environmental sampling, sensor emplacement and communications extension.</p>
+      </article>
+      <article class="feature">
+        <p class="feature-num">Off-World</p>
+        <h3>Extraterrestrial Operations</h3>
+        <p>In an extraterrestrial environment the vehicle may bore in regolith, ice-cemented regolith or rock to reach a lava tube, sample subsurface ice or emplace instruments. Cutterhead thrust does not depend on the vehicle's weight, which enables operation at any inclination in low gravity. In a cable-laying variant, the vehicle leaves a power or data cable in the bore and the discharged spoil buries it.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Status -->
+  <section class="block" id="status">
+    <div class="block-head">
+      <p class="eyebrow">Status</p>
+      <h2>Design Stage, Patent Pending.</h2>
+      <p class="lede">GOPHER is a design, not yet a machine. Nothing on this page is a test result.</p>
+    </div>
+
+    <dl class="specs">
+      <div><dt>Design</dt><dd>Revision G</dd><p>Full-vehicle CAD model; the exterior views on this page are rendered from it</p></div>
+      <div><dt>Patent</dt><dd>Provisional Filed</dd><p>U.S. provisional patent application, November 8, 2026, with 16 drawing sheets</p></div>
+      <div><dt>Hardware</dt><dd>Not Yet Built</dd><p>No prototype and no test data exist yet</p></div>
+    </dl>
+  </section>
+
+  <section class="block contact" id="contact">
+    <div class="block-head">
+      <p class="eyebrow">Contact</p>
+      <h2>Get In Touch.</h2>
+      <p class="lede">Ethan M. Kim · <a href="mailto:ethan_m_kim@brown.edu">ethan_m_kim@brown.edu</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 Ethan M. Kim · GOPHER · Patent Pending · All Rights Reserved. Images are exterior renderings and two schematic patent drawings for display; no design files are published.</p>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>

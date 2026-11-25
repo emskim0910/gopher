@@ -1,0 +1,43 @@
+# Checks every file of every commit on GitHub, then publishes the site only if the check passes.
+# Only index.html and assets/ are published; the README and the guard are not served as web pages.
+#
+# One-time setup on github.com: Settings > Pages > Build and deployment > Source: "GitHub Actions".
+#
+# This check runs after a push, so it cannot keep a file out of the public repository. That is the
+# job of the local hooks. A red X here means something reached the repository that should not have:
+# remove it and rewrite history.
+name: check and publish
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: python tools/check_protected.py --history HEAD
+  publish:
+    needs: check
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - run: mkdir _site && cp index.html _site/ && cp -r assets _site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4

@@ -1,0 +1,17 @@
+#!/bin/sh
+# Blocks any commit that would add design data. See tools/check_protected.py.
+# The same script serves as pre-merge-commit.
+
+# A change to the guard itself must be deliberate: it is refused unless GUARD_CHANGE=1 is set.
+changed=$(git diff --cached --name-only | grep -E '^(tools/|\.githooks/|\.github/|\.gitignore$)')
+if [ -n "$changed" ] && [ "$GUARD_CHANGE" != "1" ] && git rev-parse -q --verify HEAD >/dev/null; then
+  echo "Commit refused: it changes the file-protection guard:"
+  echo "$changed"
+  echo "Review the change, then repeat with GUARD_CHANGE=1 if it is intended."
+  exit 1
+fi
+
+python tools/check_protected.py || {
+  echo "Commit refused by the file-protection check."
+  exit 1
+}

@@ -1,0 +1,20 @@
+# Deny by default. Nothing enters this repository unless it is listed below.
+# The same list is enforced, with content checks, by tools/check_protected.py.
+*
+!*/
+
+!.gitignore
+!.nojekyll
+!README.md
+!index.html
+!assets/style.css
+!assets/app.js
+!assets/side-view.webp
+!assets/hero/f[0-3][0-9].webp
+!assets/figures/fig-07-advance-cycle.webp
+!assets/figures/fig-12-mission-schematic.webp
+!tools/check_protected.py
+!.githooks/pre-commit
+!.githooks/pre-merge-commit
+!.githooks/pre-push
+!.github/workflows/protect.yml
